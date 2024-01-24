@@ -15,8 +15,10 @@ node {
     }
     stage('Manual Approval') {
         input 'Lanjutkan ke tahap Deploy?'
+        echo 'Lanjut ke tahap Deployment'
     }
     stage('Deploy') {
+        sh 'python add2vals.py'
         sleep 60
         input 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
     }
