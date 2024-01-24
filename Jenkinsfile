@@ -13,4 +13,11 @@ node {
             junit 'test-reports/results.xml'
         }
     }
+    stage('Manual Approval') {
+        input 'Lanjutkan ke tahap Deploy?'
+    }
+    stage('Deploy') {
+        sleep 60
+        input 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
+    }
 }
