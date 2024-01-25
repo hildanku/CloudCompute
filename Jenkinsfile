@@ -18,7 +18,7 @@ node {
     stage('Deploy') {
         unstash(name: 'compiled-results')
         sh "docker run --rm -v '${pwd()}/sources:/src' cdrx/pyinstaller-linux:python2 'pyinstaller -F add2vals.py'"
-        archiveArtifacts "sources/arctifacts/add2vals"
+        archiveArtifacts "sources/dist/add2vals"
         sleep time: 60 , unit: 'SECONDS'
         } 
 }
