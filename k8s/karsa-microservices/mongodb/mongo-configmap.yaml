@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+data:
+  mongo.conf: |
+    storage:
+      dbPath: /data/db
+
+# line 1 : Deklarasi versi API Kubernetes yang digunakan
+# line 2 : menggunakan object ConfigMap
+# line 3 : menginisialisasi metadata
+# line 4 : memberikan nama object dengan nama mongo-config
+# line 5-8 : sepemahaman saya, saya sedang membuat file configuration dengan nama mongo.conf yang dimana isi dari konfigurasi tersebut
+# menyatakan bahwa path storage nya database kita akan tersimpan di /data/db
