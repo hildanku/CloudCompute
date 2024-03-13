@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: '/data/mongodb'
+    path: "/data/db"
 
 # line 1 : Deklarasi versi API Kubernetes yang digunakan
 # line 2 : menggunakan object PersistenVolume

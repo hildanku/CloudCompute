@@ -17,10 +17,9 @@ spec:
         - name: mongo-credentials
           secret:
             secretName: mongo-secret
-
         - name: data
           persistentVolumeClaim:
-            claimName: mongo-pvc
+            claimName: mongo-pv-claim
         - name: config
           configMap:
             name: mongo-config
