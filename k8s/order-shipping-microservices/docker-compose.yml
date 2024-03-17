@@ -21,7 +21,7 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+      AMQP_URL: amqp://guest:guest@rabbitmq:15672
     networks:
       - rabbitmq_network
   shipping-service:
@@ -32,7 +32,7 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+      AMQP_URL: amqp://guest:guest@rabbitmq:15672
     networks:
       - rabbitmq_network
 
