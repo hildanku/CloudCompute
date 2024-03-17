@@ -3,7 +3,7 @@ version: "3.2"
 services:
 
   rabbitmq:
-    image: rabbitmq:3.8-management-alpine
+    image: rabbitmq:3.11-management
     container_name: 'rabbitmq_submissionakhir'
     ports:
         - 5672:5672
