@@ -4,10 +4,10 @@ services:
 
   rabbitmq:
     image: rabbitmq:3.11-management
-    container_name: 'rabbitmq_submissionakhir'
+    container_name: 'rbq'
     ports:
         - 5672:5672
-        - 5673:15672
+        - 15672:15672
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
@@ -15,7 +15,7 @@ services:
         - rabbitmq_network
   order-service:
     image: ghcr.io/hildanku/order-service:latest
-    container_name: 'order_service_submissionakhir'
+    container_name: 'order-service'
     ports:
       - "3000:3000"
     depends_on:
@@ -26,7 +26,7 @@ services:
       - rabbitmq_network
   shipping-service:
     image: ghcr.io/hildanku/shipping-service:latest
-    container_name: 'shipping_service_submissionakhir'
+    container_name: 'shipping-service'
     ports:
       - "3001:3001"
     depends_on:
