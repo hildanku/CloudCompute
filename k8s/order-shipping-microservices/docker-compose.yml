@@ -1,18 +1,6 @@
 version: "3.2"
 
 services:
-
-  rabbitmq:
-    image: rabbitmq:3.11-management
-    container_name: 'rbq'
-    ports:
-        - 5672:5672
-        - 15672:15672
-    volumes:
-        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-    networks:
-        - rabbitmq_network
   order-service:
     image: ghcr.io/hildanku/order-service:latest
     container_name: 'order-service'
@@ -21,7 +9,7 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      AMQP_URL: amqp://guest:guest@rabbitmq:15672
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672
     networks:
       - rabbitmq_network
   shipping-service:
@@ -32,9 +20,23 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      AMQP_URL: amqp://guest:guest@rabbitmq:15672
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672
     networks:
       - rabbitmq_network
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: 'rbq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq/
+        - rabbitmq_log:/var/log/rabbitmq
+    networks:
+        - rabbitmq_network
+volumes:
+  rabbitmq_data:
+  rabbitmq_log:
 
 networks:
   rabbitmq_network:
