@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: order-service
 spec:
+  type: NodePort
   selector:
     app: order
   ports:
