@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order-service
+          image: ghcr.io/hildanku/order-service:latest
+          env:
+            - name: AMQP_URL
+              value: amqp://guest:guest@rabbitmq:5672
+            - name: PORT
+              value: "3000"
+          ports:
+            - containerPort: 3000
