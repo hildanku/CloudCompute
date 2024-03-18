@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipping
+  template:
+    metadata:
+      labels:
+        app: shipping
+    spec:
+      containers:
+        - name: shipping-service
+          image: ghcr.io/hildanku/shipping-service:latest
+          env:
+            - name: AMQP_URL
+              value: amqp://guest:guest@rabbitmq:5672
+            - name: PORT
+              value: "3001"
+          ports:
+            - containerPort: 3001
+
+
