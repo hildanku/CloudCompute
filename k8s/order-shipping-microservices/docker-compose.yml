@@ -1,43 +1,42 @@
-version: "3.2"
-
-services:
+version: "3.2" # menggunakan docker-compose versi 3.2
+services: # mendefinisikan service apa yang ingin dideploy
   order-service:
-    image: ghcr.io/hildanku/order-service:latest
-    container_name: 'order-service'
-    ports:
+    image: ghcr.io/hildanku/order-service:latest # menggunakan image hasil build dari Dockerfile
+    container_name: 'order-service' # memberi nama 
+    ports: expost port
       - "3000:3000"
-    depends_on:
+    depends_on:  # service ini akan berjalan jika service rabbitmq sudah berjalan terlebih dahnulu
       - rabbitmq
-    environment:
-      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+    environment:  # menyeting env variable
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672 
     networks:
-      - rabbitmq_network
-  shipping-service:
-    image: ghcr.io/hildanku/shipping-service:latest
-    container_name: 'shipping-service'
-    ports:
+      - rabbitmq_network  # menggunakan network rabbitmq_network
+  shipping-service: # membuat service baru
+    image: ghcr.io/hildanku/shipping-service:latest # menggunakan image yagn sudah dibuild yang diambil dari github akckages
+    container_name: 'shipping-service'  # nama container
+    ports: # expose port
       - "3001:3001"
-    depends_on:
+    depends_on: # service ini akan berjalan jika service rabbitmq sudah berjalan terlebih dahnulu
       - rabbitmq
-    environment:
+    environment: # menyeting env variable
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
-    networks:
+    networks: # menggunakan network rabbitmq_network
       - rabbitmq_network
   rabbitmq:
-    image: rabbitmq:3.11-management
-    container_name: 'rbq'
-    ports:
-        - 5672:5672
-        - 15672:15672
-    volumes:
+    image: rabbitmq:3.11-management # image yang diambil dari dockerhub
+    container_name: 'rbq' # nama container
+    ports: # mengekspos port
+        - 5672:5672 # port internal container
+        - 15672:15672 # port untuk akses public
+    volumes: # menggunakan volume yang sudah dibuat
         - rabbitmq_data:/var/lib/rabbitmq/
         - rabbitmq_log:/var/log/rabbitmq
-    networks:
+    networks: # menggunakan network rabbitmq_network
         - rabbitmq_network
-volumes:
+volumes: # membuat volume baru
   rabbitmq_data:
   rabbitmq_log:
 
-networks:
+networks: # menginisialisasikan network baru bernama rabbitmq_network dengan driver bridge
   rabbitmq_network:
-    driver: bridge
+    driver: bridge # bridge berfungsi agar setiap container bisa saling terhubung
