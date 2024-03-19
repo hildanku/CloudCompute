@@ -18,8 +18,6 @@ spec:
           env:
             - name: AMQP_URL
               # value diambil dari secret rabbitmq srver
-              value: amqp://user:8pxw0oRz14quLRiZ@rabbitmq-server.default.svc.cluster.local:5672
+              value: amqp://user:Cnhfkp6njqteT4fE@rabbitmq-server.default.svc.cluster.local:5672
             - name: PORT
               value: "3000"
-          ports:
-            - containerPort: 3000
