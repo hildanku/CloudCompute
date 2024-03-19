@@ -17,10 +17,9 @@ spec:
           image: ghcr.io/hildanku/shipping-service:latest
           env:
             - name: AMQP_URL
-              value: amqp://guest:guest@rabbitmq:5672
+              # value diambil dari secret rabbitmq srver
+              value: amqp://user:Cnhfkp6njqteT4fE@rabbitmq-server.default.svc.cluster.local:5672
             - name: PORT
               value: "3001"
-          ports:
-            - containerPort: 3001
 
 
