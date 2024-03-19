@@ -35,7 +35,7 @@ services: # mendefinisikan service apa yang ingin dideploy
         - rabbitmq_data:/var/lib/rabbitmq/ # memakai volume rabbitmq_data yang menampung /var/lib/rabbitmq
         - rabbitmq_log:/var/log/rabbitmq # memakai volume rabbitmq_log yang menampung var/log/rabbitmq
     networks: # menhubungkan container ke rabbitm
-        - rabbitmq_networkq
+        - rabbitmq_network
 volumes:
   rabbitmq_data: # membuat volume rabbitmq_data
   rabbitmq_log: # membuat volume rabbitmq_log
