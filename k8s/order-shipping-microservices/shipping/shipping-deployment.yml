@@ -1,21 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: apps/v1 # menggunakan apiVersio kubernetes versi apps/v1
+kind: Deployment # menggunakan object deployment
 metadata:
-  name: shipping
+  name: shipping # memberi nama deployment
 spec:
-  replicas: 1
+  replicas: 1 # membuat 1 replika pod saja
   selector:
     matchLabels:
-      app: shipping
+      app: shipping # memilih label app shipping
   template:
     metadata:
       labels:
-        app: shipping
+        app: shipping # membuat label app shipping
     spec:
       containers:
-        - name: shipping-service
-          image: ghcr.io/hildanku/shipping-service:latest
-          env:
+        - name: shipping-service # memberi nama container
+          image: ghcr.io/hildanku/shipping-service:latest # menggunakan image dari Dockerfile yang sudah dibuild
+          env: # setting environment variabel
             - name: AMQP_URL
               # value diambil dari secret rabbitmq srver
               value: amqp://user:Cnhfkp6njqteT4fE@rabbitmq-server.default.svc.cluster.local:5672

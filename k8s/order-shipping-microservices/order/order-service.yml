@@ -1,12 +1,12 @@
-apiVersion: v1
-kind: Service
+apiVersion: v1 # menggunakan apiVersio kubernetes versi 1
+kind: Service # menggunakan object service
 metadata:
-  name: order-service
+  name: order-service # memberi nama service
 spec:
-  type: NodePort
+  type: LoadBalancer # disini saya menggunakan loadbalancer, agar service dapat diakses dari internet/public
   selector:
-    app: order
-  ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
+    app: order # memilih label app
+  ports: # konfigurasi ports
+    - protocol: TCP # menggunakan protocol TCP
+      port: 3000 # mengekspos port 3000
+      targetPort: 3000 # mengekspos port 3000

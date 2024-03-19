@@ -1,12 +1,12 @@
-apiVersion: v1
-kind: Service
+apiVersion: v1 # menggunakan apiVersio kubernetes versi 1
+kind: Service # menggunakan object service
 metadata:
-  name: shipping-service
+  name: shipping-service # memberi nama service
 spec:
-  type: LoadBalancer
+  type: LoadBalancer # disini saya menggunakan loadbalancer, agar service dapat diakses dari internet/public
   selector:
     app: shipping
   ports:
-    - protocol: TCP
-      port: 3001
-      targetPort: 3001
+    - protocol: TCP # menggunakan protocol TCP
+      port: 3001 # mengekspos port 3001
+      targetPort: 3001 # mengekspos port 3001
