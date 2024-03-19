@@ -9,7 +9,7 @@ services: # mendefinisikan service apa yang ingin dideploy
     depends_on: # memastikan sebelum running container ini, service rabbitmq harus running terlebih dahulu
       - rabbitmq
     environment: # mengkonfigurasi environment variabel
-      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+      AMQP_URL: amqp://guest:guest@localhost:5672
     networks: # menghubungkan container kedalam network rabbitmq_network
       - rabbitmq_network
 
@@ -21,7 +21,7 @@ services: # mendefinisikan service apa yang ingin dideploy
     depends_on: # memastikan sebelum running container ini, service rabbitmq harus running terlebih dahulu
       - rabbitmq
     environment: # mengkonfigurasi environment variabel
-      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+      AMQP_URL: amqp://guest:guest@localhost:5672
     networks: # menghubungkan container kedalam network rabbitmq_network
       - rabbitmq_network
 
