@@ -23,7 +23,7 @@ spec:
   gateways:
   - order-gateway
   http:
-  -match:
+  - match:
     - uri:
         prefix: /order
   - route:
