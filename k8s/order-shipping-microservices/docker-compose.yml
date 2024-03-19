@@ -39,10 +39,15 @@ services: # mendefinisikan service apa yang ingin dideploy
     networks: # menhubungkan container ke rabbitm
         - rabbitmq_network
     restart: always # restart ketika container crash
+
 volumes:
   rabbitmq_data: # membuat volume rabbitmq_data
+    name: rabbitmq_data # memberi nama volume  
   rabbitmq_log: # membuat volume rabbitmq_log
+    name: rabbitmq_log # memberi nama volume
 
 networks:
   rabbitmq_network: # membuat network rabbitmq_network
+  # membuat network rabbitmq_network
+    name: rabbitmq_network # memberi nama networknya apa
     driver: bridge # dengan driver bridge, agar setiap container bisa saling terkoneksi
