@@ -25,7 +25,7 @@ services: # mendefinisikan service apa yang ingin dideploy
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
     networks: # menghubungkan container kedalam network rabbitmq_network
       - rabbitmq_network
-    restart: OnFailure # restart ketika container crash
+    restart: on-failure # restart ketika container crash
 
   rabbitmq:
     image: rabbitmq:3.11-management # menggunakan image hasil pull dari dockerhub
