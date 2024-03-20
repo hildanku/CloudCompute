@@ -15,17 +15,27 @@ services: # mendefinisikan service apa yang ingin dideploy
     restart: always # restart ketika container crash
 
   shipping-service:
-    image: ghcr.io/hildanku/shipping-service:latest # menggunakan image hasil build dari Dockerfile
-    container_name: 'shipping-service' # memberi nama container
-    ports: # mengekspos port 3001
+    image: ghcr.io/hildanku/shipping-service:latest
+    container_name: 'shipping-service'
+    ports:
       - "3001:3001"
-    depends_on: # memastikan sebelum running container ini, service rabbitmq harus running terlebih dahulu
-      - rabbitmq
-    environment: # mengkonfigurasi environment variabel
+    environment:
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
-    networks: # menghubungkan container kedalam network rabbitmq_network
+    networks:
       - rabbitmq_network
-    restart: always # restart ketika container crash
+
+  # shipping-service:
+  #   image: ghcr.io/hildanku/shipping-service:latest # menggunakan image hasil build dari Dockerfile
+  #   container_name: 'shipping-service' # memberi nama container
+  #   ports: # mengekspos port 3001
+  #     - "3001:3001"
+  #   depends_on: # memastikan sebelum running container ini, service rabbitmq harus running terlebih dahulu
+  #     - rabbitmq
+  #   environment: # mengkonfigurasi environment variabel
+  #     AMQP_URL: amqp://guest:guest@rabbitmq:5672
+  #   networks: # menghubungkan container kedalam network rabbitmq_network
+  #     - rabbitmq_network
+  #   restart: always # restart ketika container crash
 
   rabbitmq:
     image: rabbitmq:3.11-management # menggunakan image hasil pull dari dockerhub
