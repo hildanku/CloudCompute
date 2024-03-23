@@ -1,45 +1,24 @@
-pipeline {
-    agent none
-    stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'python:2-alpine'
-                }
-            }
-            steps {
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py'
-            }
-        }
-        stage('Test') {
-            agent {
-                docker {
-                    image 'qnib/pytest'
-                }
-            }
-            steps {
-                sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
-            }
-            post {
-                always {
-                    junit 'test-reports/results.xml'
-                }
-            }
-        }
-        stage('Deliver') {
-            agent {
-                docker {
-                    image 'cdrx/pyinstaller-linux:python2'
-                }
-            }
-            steps {
-                sh 'pyinstaller --onefile sources/add2vals.py'
-            }
-            post {
-                success {
-                    archiveArtifacts 'dist/add2vals'
-                }
-            }
+node {
+    stage('Build') {
+        docker.image('python:alpine3.19').inside {
+            sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+            stash(name: 'compiled-results', includes: 'sources/*.py*')
         }
     }
+    stage('Test') {
+        docker.image('qnib/pytest').inside {
+            sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
+            junit 'test-reports/results.xml'
+        }
+    }
+    stage('Manual Approval') {
+        input 'Lanjutkan ke tahap Deploy?'
+        echo 'Lanjut ke tahap Deployment'
+    }
+    stage('Deploy') {
+        unstash(name: 'compiled-results')
+        sh "docker run --rm -v '${pwd()}/sources:/src' cdrx/pyinstaller-linux:python2 'pyinstaller -F add2vals.py'"
+        archiveArtifacts "sources/dist/add2vals"
+        sleep time: 60 , unit: 'SECONDS'
+        } 
 }
