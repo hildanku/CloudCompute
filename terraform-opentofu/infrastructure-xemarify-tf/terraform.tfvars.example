@@ -1,0 +1,32 @@
+# DigitalOcean API token
+do_token = "your_digitalocean_api_token"
+
+# Project name
+project_name = "xemarify"
+
+# Path to SSH public key
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
+
+# Region (sgp1 = Singapore)
+region = "sgp1"
+
+# App server size (1 vCPU, 1GB RAM)
+app_server_size = "s-1vcpu-1gb"
+
+# Agent size (1 vCPU, 512MB RAM)
+agent_size = "s-1vcpu-512mb-10gb"
+
+# Number of agent VMs
+agent_count = 2
+
+# Droplet image
+droplet_image = "ubuntu-22-04-x64"
+
+# IP addresses allowed to SSH (restrict for security)
+ssh_allowed_ips = ["0.0.0.0/0"]
+
+# IP addresses allowed to access the API
+api_allowed_ips = ["0.0.0.0/0"]
+
+# IP addresses allowed to access the web interface
+web_allowed_ips = ["0.0.0.0/0"]

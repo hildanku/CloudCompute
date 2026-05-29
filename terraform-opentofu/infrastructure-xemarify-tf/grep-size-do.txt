@@ -1,0 +1,1 @@
+curl -s -X GET "https://api.digitalocean.com/v2/sizes" -H "Authorization: Bearer $DO_TOKEN" | jq -r '.sizes[] | select(.memory == 512) | .slug' 2>/dev/null || echo "DO_TOKEN not set or API error"

@@ -100,3 +100,4 @@ ENV/
 .mypy_cache/
 .terraform
 .terraform.lock.hcl
+output.infra
